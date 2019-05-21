@@ -2,7 +2,13 @@
 #include <fmgr.h>
 #include <catalog/catversion.h>
 
-#define DatumGetInt8(X)		((int8) GET_1_BYTE(X))  /* XXX */
+//#define DatumGetInt8(X)		((int8) GET_1_BYTE(X))  /* XXX */
+#if PG_VERSION_NUM < 110000
+#define DatumGetInt8(X)     ((int8) GET_1_BYTE(X))  /* XXX */
+#else
+#define DatumGetInt8(X)     ((int8) (X))
+#endif
+
 
 #if PG_VERSION_NUM < 90600
 
